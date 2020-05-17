@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sql inject</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" charset="UTF-8"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js" charset="UTF-8"></script>
+</head>
+<body>
+<h2>sql 注入实例</h2>
+
+username:<input type="text" id="username" STYLE="width: 100%;"/>
+<button type="submit" onclick="fetch()">提交</button>
+
+<div>
+    <textarea id="content" style="width: 500px;height: 300px;"></textarea>
+</div>
+<script type="text/javascript">
+    function fetch() {
+        axios.get("/sqlInject/001?username=" + $("#username").val()).then(function (response) {
+            console.log('data--', response.data);
+            $("#content").val(JSON.stringify(response.data));
+        }).catch(function (error) {
+            console.log(error);
+        }).finally(function () {
+            // always executed
+        });
+    }
+</script>
+</body>
+</html>
